@@ -30,12 +30,12 @@ function acceptRequest(message) {
     });
 }
 
-function injectInterceptor(tab) {    
+function injectInterceptor(tab) {
     // This code will be injected to page which tries to submit oauth form ('Ok' click).
     // Intercepting form submit request looks simpler than hack facebook form submitting.
     // Because we dont need await page and form load, just intercept 'Ok' click effect =).
     let code = (
-        '\'use strict\';' + 
+        '\'use strict\';' +
         '/* Poll facebook page to find the form. */' +
         'let watcher = window.setInterval(function() {' +
         '    let query = \'form[action*="' + oauthFormActionContains + '"]\';' +
@@ -91,8 +91,8 @@ function acceptToken(data) {
 }
 
 function extractToken(url) {
-    let tokenRe = new RegExp('access_token=(.*?)[&$]'),
-        expiresRe = new RegExp('expires_in=(.*?)[&$]'),
+    let tokenRe = /access_token=(\w+)/,
+        expiresRe = /expires_in=(\d+)/,
         tokenMatches = url.match(tokenRe),
         expiresMatches = url.match(expiresRe);
     return {
@@ -107,7 +107,7 @@ function closeAuthTabs(url) {
             if (tab.url.indexOf(url) !== -1) {
                 chrome.tabs.remove(tab.id);
             }
-        });    
+        });
     });
 }
 
