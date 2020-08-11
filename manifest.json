@@ -24,6 +24,7 @@
         "https://api.gotinder.com/",
         "https://graph.facebook.com/",
         "https://www.facebook.com/v2.1/dialog/oauth/confirm*",
+        "https://web.facebook.com/v3.1/dialog/oauth/confirm*",
         "https://*.tile.openstreetmap.org/*"
     ],
     "externally_connectable": {
